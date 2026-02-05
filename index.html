@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultra Luxury Client Form</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* 3D BACKGROUND */
+#bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+}
+
+/* FORM CONTAINER */
+.wrapper{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:50px 15px;
+}
+
+.container{
+    max-width:980px;
+    width:100%;
+    background:rgba(17,17,17,0.85);
+    backdrop-filter:blur(15px);
+    padding:60px 50px;
+    border-radius:30px;
+    border:1px solid rgba(212,175,55,0.3);
+    box-shadow:0 0 80px rgba(212,175,55,0.25);
+}
+
+/* HEADINGS */
+h2{
+    font-family:'Playfair Display',serif;
+    text-align:center;
+    font-size:38px;
+    color:#d4af37;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#aaa;
+    margin-bottom:50px;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+/* SECTIONS */
+.section-title{
+    margin-top:45px;
+    font-size:18px;
+    color:#d4af37;
+    border-left:4px solid #d4af37;
+    padding-left:14px;
+    margin-bottom:25px;
+}
+
+/* INPUTS */
+label{
+    display:block;
+    margin-top:22px;
+    font-size:14px;
+    color:#d4af37;
+}
+
+.subtext{
+    font-size:12px;
+    color:#888;
+    margin:6px 0 8px;
+}
+
+input, textarea, select{
+    width:100%;
+    padding:16px;
+    background:rgba(0,0,0,0.6);
+    border:1px solid #333;
+    border-radius:14px;
+    color:#fff;
+    font-size:14px;
+    transition:0.35s;
+}
+
+input:focus, textarea:focus, select:focus{
+    border-color:#d4af37;
+    box-shadow:0 0 18px rgba(212,175,55,0.35);
+    outline:none;
+}
+
+textarea{
+    resize:vertical;
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    margin-top:55px;
+    padding:20px;
+    border:none;
+    border-radius:16px;
+    font-weight:600;
+    font-size:16px;
+    cursor:pointer;
+    letter-spacing:1px;
+    background:linear-gradient(90deg,#d4af37,#f5e27a);
+    color:#111;
+    transition:0.4s;
+}
+
+button:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 40px rgba(212,175,55,0.5);
+}
+
+.hidden{display:none}
+
+/* SUCCESS */
+.success-popup{
+    position:fixed;
+    top:25px;
+    right:25px;
+    background:#111;
+    border:1px solid #d4af37;
+    padding:15px 25px;
+    border-radius:15px;
+    color:#d4af37;
+    display:none;
+    box-shadow:0 0 30px rgba(212,175,55,0.5);
+}
+
+@media(max-width:768px){
+    .container{
+        padding:40px 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 3D BACKGROUND -->
+<canvas id="bg"></canvas>
+
+<div class="wrapper">
+<div class="container">
+
+<h2>Website Project Details</h2>
+<p class="subtitle">A premium onboarding experience for elite digital brands.</p>
+
+<form id="clientForm">
+
+<div class="section-title">Business Information</div>
+
+<label>Business Name</label>
+<div class="subtext">Exact name as you want displayed publicly.</div>
+<input type="text" name="businessName" required>
+
+<label>Tagline</label>
+<div class="subtext">A short phrase that defines your brand.</div>
+<input type="text" name="tagline">
+
+<label>Address</label>
+<div class="subtext">Full location including city & pincode.</div>
+<textarea rows="2" name="address"></textarea>
+
+<label>Phone</label>
+<div class="subtext">Primary contact number.</div>
+<input type="tel" name="phone">
+
+<label>Email</label>
+<div class="subtext">Official business email.</div>
+<input type="email" name="email">
+
+<label>Working Hours</label>
+<div class="subtext">Example: Mon–Sun | 10AM–9PM</div>
+<input type="text" name="hours">
+
+<div class="section-title">About Brand</div>
+
+<label>Short Description</label>
+<div class="subtext">2–3 lines introducing your brand.</div>
+<textarea rows="3" name="shortDescription"></textarea>
+
+<label>Full Description</label>
+<div class="subtext">Detailed story, experience & uniqueness.</div>
+<textarea rows="4" name="fullDescription"></textarea>
+
+<div class="section-title">Services</div>
+
+<label>Services & Pricing</label>
+<div class="subtext">Each service with price (₹).</div>
+<textarea rows="4" name="services"></textarea>
+
+<div class="section-title">Team</div>
+
+<label>Do you have a team?</label>
+<div class="subtext">Showcase professionals on your website.</div>
+<select id="teamSelect" name="teamOption">
+<option>No</option>
+<option>Yes</option>
+</select>
+
+<div id="teamDetails" class="hidden">
+<label>Team Details</label>
+<div class="subtext">Name – Role – Experience.</div>
+<textarea rows="4" name="teamDetails"></textarea>
+</div>
+
+<div class="section-title">Features</div>
+
+<label>Online Booking</label>
+<div class="subtext">Allow customers to book online.</div>
+<select name="booking">
+<option>No</option>
+<option>Yes</option>
+</select>
+
+<label>WhatsApp Button</label>
+<div class="subtext">Instant chat with customers.</div>
+<select name="whatsappButton">
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<label>Additional Notes</label>
+<div class="subtext">References, inspiration or special requests.</div>
+<textarea rows="3" name="notes"></textarea>
+
+<button type="submit">Send via WhatsApp</button>
+
+</form>
+</div>
+</div>
+
+<div class="success-popup" id="successPopup">
+✔ WhatsApp Opened
+</div>
+
+<!-- THREE.JS -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+
+<script>
+// 3D BACKGROUND
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({canvas:document.getElementById("bg"), alpha:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+camera.position.z = 5;
+
+const geometry = new THREE.BufferGeometry();
+const count = 1500;
+const positions = [];
+
+for(let i=0;i<count;i++){
+    positions.push((Math.random()-0.5)*20);
+    positions.push((Math.random()-0.5)*20);
+    positions.push((Math.random()-0.5)*20);
+}
+
+geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions,3));
+
+const material = new THREE.PointsMaterial({
+    color:0xd4af37,
+    size:0.02,
+    transparent:true,
+    opacity:0.8
+});
+
+const points = new THREE.Points(geometry, material);
+scene.add(points);
+
+function animate(){
+    requestAnimationFrame(animate);
+    points.rotation.y += 0.0006;
+    points.rotation.x += 0.0003;
+    renderer.render(scene,camera);
+}
+animate();
+
+window.addEventListener("resize",()=>{
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+});
+
+// FORM + WHATSAPP
+const teamSelect = document.getElementById("teamSelect");
+const teamDetails = document.getElementById("teamDetails");
+
+teamSelect.addEventListener("change",()=>{
+    teamDetails.classList.toggle("hidden", teamSelect.value !== "Yes");
+});
+
+document.getElementById("clientForm").addEventListener("submit",e=>{
+    e.preventDefault();
+    const f=e.target;
+
+    const msg = `
+Website Project Details
+
+Business: ${f.businessName.value}
+Tagline: ${f.tagline.value}
+Address: ${f.address.value}
+Phone: ${f.phone.value}
+Email: ${f.email.value}
+
+Services:
+${f.services.value}
+
+Team: ${f.teamOption.value}
+${f.teamOption.value==="Yes"?f.teamDetails.value:""}
+
+Notes:
+${f.notes.value}
+`;
+
+    const number = "919324049242"; // CHANGE NUMBER
+    window.open(`https://wa.me/${number}?text=${encodeURIComponent(msg)}`,"_blank");
+
+    document.getElementById("successPopup").style.display="block";
+    setTimeout(()=>document.getElementById("successPopup").style.display="none",4000);
+
+    f.reset();
+    teamDetails.classList.add("hidden");
+});
+</script>
+
+</body>
+</html>
+
